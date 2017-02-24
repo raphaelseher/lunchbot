@@ -32,19 +32,19 @@ def send_to_slack(todays_menu)
 	menus_hash = Hash.new
 	todays_menu.each do |menu|
 		menu.menu_items.each do |item|
-			value = menus_hash[menu.name]
-			if value == nil
-				value = []
+			meals = menus_hash[menu.name]
+			if meals == nil
+				meals = []
 			end
-			value.push(item.meal)
-			menus_hash[menu.name] = value
+			meals.push(item.meal)
+			menus_hash[menu.name] = meals
 		end
 	end
 
 	message = ""
-	menus_hash.each do |key, value|
-		message = message + "*" + key + "* \n"
-		value.each do |meal|
+	menus_hash.each do |place_name, meals|
+		message = message + "*" + place_name + "* \n"
+		meals.each do |meal|
 			message = message + meal + "\n"
 		end
 		message = message + "\n"

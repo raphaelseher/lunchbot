@@ -28,10 +28,6 @@ def send_to_slack(todays_menu)
 	File.foreach('slack-webhook') {|hook| 
 		notifier = Slack::Notifier.new hook
 	}
-	
-	if notifier == nil
-		raise "No slack-webhook connection. Have you created a slack-webhook file?"
-	end
 
 	menus_hash = Hash.new
 	todays_menu.each do |menu|

@@ -1,4 +1,4 @@
-require_relative 'Scraper'
+require_relative 'scraper'
 
 class UniwirtScraper < Scraper
   attr_accessor :weeklyMenu

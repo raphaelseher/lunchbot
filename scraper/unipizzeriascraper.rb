@@ -1,4 +1,4 @@
-require_relative 'Scraper'
+require_relative 'scraper'
 
 class UniPizzeriaScraper < Scraper
   attr_accessor :name, :weeklyMenu

@@ -1,4 +1,4 @@
-require_relative 'Scraper'
+require_relative 'scraper'
 
 class MittagstischScraper < Scraper
   attr_accessor :weeklyMenu

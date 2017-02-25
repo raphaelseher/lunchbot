@@ -1,12 +1,10 @@
 require_relative 'scraper'
 
 class MittagstischScraper < Scraper
-  attr_accessor :weeklyMenu
-
-  @@name = "Mittagstisch"
+  @name = "Mittagstisch"
 
   def initialize
-    @weeklyMenu = WeeklyMenu.new(@@name)
+    @weekly_menu = WeeklyMenu.new(@name)
   end
 
   def scrape
@@ -31,21 +29,21 @@ class MittagstischScraper < Scraper
 
     day_data_table_row.each_with_index do |row, index|
       if (row.text == "Suppe")
-        @weeklyMenu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 1].text))
-        @weeklyMenu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 2].text))
+        @weekly_menu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 1].text))
+        @weekly_menu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 2].text))
       end
 
       if (row.text == "Hauptspeise")
         if (day_data_table_row[index + 1].text.length > 1)
-          @weeklyMenu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 1].text))
+          @weekly_menu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 1].text))
         end
 
         if (day_data_table_row[index + 2].text.length > 1)
-          @weeklyMenu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 2].text))
+          @weekly_menu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 2].text))
         end
 
         if (day_data_table_row[index + 3].text.length > 1)
-          @weeklyMenu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 3].text))
+          @weekly_menu.menu_items.push(MenuItem.new(dates[day_index], day_data_table_row[index + 3].text))
         end
 
         day_index += 1

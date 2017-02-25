@@ -15,14 +15,14 @@ def scrape_websites(scrapers)
   menus = []
   scrapers.each do |scraper|
     scraper.scrape
-    menus.push(scraper.weeklyMenu)
+    menus.push(scraper.weekly_menu)
   end
 
   puts "Scraped from #{menus.length} sites"
-  menus.each do |weeklyMenu|
+  menus.each do |weekly_menu|
     puts ""
-    puts "#{weeklyMenu.name}"
-    weeklyMenu.menu_items.each do |menu_item|
+    puts "#{weekly_menu.name}"
+    weekly_menu.menu_items.each do |menu_item|
       puts "## #{menu_item.date} #{menu_item.meal}"
     end
   end
@@ -33,18 +33,18 @@ end
 def save_to_database(menus)
   dbconnector = Databaseconnector.new(DBNAME)
 
-  menus.each do |weeklyMenu|
+  menus.each do |weekly_menu|
     place_id = nil
 
     # get and insert place
-    places = dbconnector.get_place(weeklyMenu.name)
+    places = dbconnector.get_place(weekly_menu.name)
     if places.length > 0
       place_id = places[0][0]
     else
-      place_id = dbconnector.save_place(weeklyMenu.name)
+      place_id = dbconnector.save_place(weekly_menu.name)
     end
 
-    weeklyMenu.menu_items.each do |menu_item|
+    weekly_menu.menu_items.each do |menu_item|
       # set old entries to hidden
       results = dbconnector.get_menu(place_id, menu_item.date)
       results.each do |row|
@@ -52,7 +52,7 @@ def save_to_database(menus)
       end
     end
 
-    weeklyMenu.menu_items.each do |menu_item|
+    weekly_menu.menu_items.each do |menu_item|
       dbconnector.save_menu(place_id, menu_item)
     end
   end

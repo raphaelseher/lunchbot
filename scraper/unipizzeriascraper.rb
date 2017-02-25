@@ -1,12 +1,10 @@
 require_relative 'scraper'
 
 class UniPizzeriaScraper < Scraper
-  attr_accessor :name, :weeklyMenu
-
-  @@name = "Uni Pizzeria"
+  @name = "Uni Pizzeria"
 
   def initialize
-    @weeklyMenu = WeeklyMenu.new(@@name)
+    @weekly_menu = WeeklyMenu.new(@name)
   end
 
   def scrape
@@ -66,7 +64,7 @@ class UniPizzeriaScraper < Scraper
 
     weekday.each_with_index do |meals, index|
       meals.each do |meal|
-        @weeklyMenu.menu_items.push(MenuItem.new(dates[index], meal))
+        @weekly_menu.menu_items.push(MenuItem.new(dates[index], meal))
       end
     end
 

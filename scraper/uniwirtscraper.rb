@@ -1,12 +1,10 @@
 require_relative 'scraper'
 
 class UniwirtScraper < Scraper
-  attr_accessor :weeklyMenu
-
-  @@name = "Uniwirt"
+  @name = "Uniwirt"
 
   def initialize
-    @weeklyMenu = WeeklyMenu.new(@@name)
+    @weekly_menu = WeeklyMenu.new(@name)
   end
 
   def scrape
@@ -32,6 +30,6 @@ class UniwirtScraper < Scraper
       end
     end
 
-    @weeklyMenu.menu_items = all_menu_items
+    @weekly_menu.menu_items = all_menu_items
   end
 end

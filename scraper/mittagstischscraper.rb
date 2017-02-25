@@ -1,10 +1,10 @@
 require_relative 'scraper'
 
 class MittagstischScraper < Scraper
-  @name = "Mittagstisch"
+  NAME = "Mittagstisch"
 
   def initialize
-    @weekly_menu = WeeklyMenu.new(@name)
+    @weekly_menu = WeeklyMenu.new(NAME)
   end
 
   def scrape

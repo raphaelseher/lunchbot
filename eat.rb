@@ -26,7 +26,7 @@ end
 def send_to_slack(todays_menu)
 	notifier = nil
 	File.foreach('slack-webhook') {|hook| 
-		notifier = Slack::Notifier.new hook
+		notifier = Slack::Notifier.new URI.encode(hook)
 	}
 
 	menus_hash = Hash.new

@@ -5,9 +5,10 @@ require 'open-uri'
 
 require_relative 'database'
 require_relative 'weekly_menu'
-require_relative 'scraper/uniwirtscraper.rb'
-require_relative 'scraper/mittagstischscraper.rb'
-require_relative 'scraper/unipizzeriascraper.rb'
+require_relative 'scraper/uniwirtscraper'
+require_relative 'scraper/mittagstischscraper'
+require_relative 'scraper/unipizzeriascraper'
+require_relative 'scraper/mensaklagenfurtscraper'
 
 DBNAME = "lunchdata.sqlite3"
 
@@ -63,6 +64,7 @@ if __FILE__ == $0
   scrapers.push(UniwirtScraper.new)
   scrapers.push(MittagstischScraper.new)
   scrapers.push(UniPizzeriaScraper.new)
+  scrapers.push(MensaKlagenfurtScraper.new)
 
   menus = scrape_websites(scrapers)
   save_to_database(menus)

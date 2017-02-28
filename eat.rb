@@ -5,7 +5,7 @@ require 'slack-notifier'
 require_relative 'database'
 require_relative 'weekly_menu'
 
-DBNAME = "lunchdata.sqlite3"
+DBNAME = "/opt/lunchbot/lunchdata.sqlite3"
 
 def generate_weekly_menu(menus, places_data)
 	places = Hash.new()

@@ -10,7 +10,7 @@ require_relative 'scraper/mittagstischscraper'
 require_relative 'scraper/unipizzeriascraper'
 require_relative 'scraper/mensaklagenfurtscraper'
 
-DBNAME = "lunchdata.sqlite3"
+DBNAME = "/opt/lunchbot/lunchdata.sqlite3"
 
 def scrape_websites(scrapers)
   menus = []

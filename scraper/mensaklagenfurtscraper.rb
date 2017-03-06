@@ -14,7 +14,7 @@ class MensaKlagenfurtScraper < Scraper
     days = page.css('div#speiseplan div#week div#days div.day')
     days.each do |day|
     	date_string = day.css('span.date').text
-    	date = Date.strptime(date_string, "%d.%m.%Y")
+    	date = DateTime.strptime(date_string, "%d.%m.%Y")
     	dates.push(date)
    	end
 

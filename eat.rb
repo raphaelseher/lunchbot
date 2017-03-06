@@ -5,7 +5,10 @@ require 'slack-notifier'
 require_relative 'database'
 require_relative 'weekly_menu'
 
-DBNAME = "/opt/lunchbot/lunchdata.sqlite3"
+
+PATH = "/opt/lunchbot/"
+DBNAME = PATH + "lunchdata.sqlite3"
+WEBHOOK = PATH + "slack-webhook"
 
 def generate_weekly_menu(menus, places_data)
 	places = Hash.new()
@@ -25,7 +28,7 @@ end
 
 def send_to_slack(todays_menu)
 	notifier = nil
-	File.foreach('slack-webhook') {|hook| 
+	File.foreach(WEBHOOK) {|hook| 
 		notifier = Slack::Notifier.new URI.encode(hook)
 	}
 

@@ -1,3 +1,4 @@
 slack-webhook
 .DS_Store
 ./lunchdata.sqlite3
+/lunchdata.sqlite3

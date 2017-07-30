@@ -20,7 +20,7 @@ class UniwirtScraper < Scraper
       meals = []
       item.css('p').each_with_index do |p, index|
         if index == 0
-          date = DateTime.strptime(p.text, '%d.%m.%y')
+          date = DateTime.strptime(p.text, '%d.%m.%Y')
         else
           meals.push(p.text)
         end

@@ -10,7 +10,7 @@ require_relative 'scraper/mittagstischscraper'
 require_relative 'scraper/unipizzeriascraper'
 require_relative 'scraper/mensaklagenfurtscraper'
 
-DBNAME = "/opt/lunchbot/lunchdata.sqlite3"
+DBNAME = "lunchdata.sqlite3"
 
 def scrape_websites(scrapers)
   menus = []
@@ -32,7 +32,7 @@ def scrape_websites(scrapers)
 end
 
 def save_to_database(menus)
-  dbconnector = Databaseconnector.new(DBNAME)
+  dbconnector = Databaseconnector.new(File.join(File.dirname(__FILE__), DBNAME))
 
   menus.each do |weekly_menu|
     place_id = nil

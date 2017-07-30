@@ -3,12 +3,13 @@ require_relative 'scraper'
 class UniwirtScraper < Scraper
   NAME = "Uniwirt"
 
-  def initialize
+  def initialize(loader = WebsiteLoader.new("http://www.uniwirt.at/wp/"))
+    @loader = loader
     @weekly_menu = WeeklyMenu.new(NAME)
   end
 
   def scrape
-    page = Nokogiri::HTML(open("http://www.uniwirt.at/wp/"))
+    page = @loader.load
     div_mittag = page.css('div#mittag')
 
     all_menu_items = []

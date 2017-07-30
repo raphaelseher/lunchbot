@@ -3,13 +3,14 @@ require_relative 'scraper'
 class MittagstischScraper < Scraper
   NAME = "Mittagstisch"
 
-  def initialize
+  def initialize(loader = WebsiteLoader.new("http://www.lakeside-scitec.com/services/gastronomie/mittagstisch/"))
+    @loader = loader
     @weekly_menu = WeeklyMenu.new(NAME)
   end
 
   def scrape
-    page = Nokogiri::HTML(open("http://www.lakeside-scitec.com/services/gastronomie/mittagstisch/"))
-
+    page = @loader.load
+    
     title = page.css('div.companyinfo h1')
     date_span_string =  title.text.split('|')[1]
     dates_span = date_span_string.strip.split('-')

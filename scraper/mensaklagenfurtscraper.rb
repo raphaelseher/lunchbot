@@ -1,14 +1,18 @@
 require_relative 'scraper'
+require_relative 'websiteloader'
+
+require 'date'
 
 class MensaKlagenfurtScraper < Scraper
   NAME = "Mensa Klagenfurt"
 
-  def initialize
+  def initialize(loader = WebsiteLoader.new("http://menu.mensen.at/index/index/locid/45"))
+    @loader = loader
     @weekly_menu = WeeklyMenu.new(NAME)
   end
 
-  def scrape
-    page = Nokogiri::HTML(open("http://menu.mensen.at/index/index/locid/45"))
+  def scrape()
+    page = @loader.load
 
     dates = []
     days = page.css('div#speiseplan div#week div#days div.day')
@@ -29,11 +33,15 @@ class MensaKlagenfurtScraper < Scraper
 	  meals = []
 		content.each do |menu|
 			meal = ''
-			
+
 			menu.css('p').each do |p|
 				if p.text.include? '€'
-					meals.push(meal)
+					meals.push(meal.rstrip)
 					break
+				end
+
+				p.css("br").each do |br|
+					br.replace " "
 				end
 
 				meal = meal + p.text + " "

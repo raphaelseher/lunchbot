@@ -3,12 +3,13 @@ require_relative 'scraper'
 class UniPizzeriaScraper < Scraper
   NAME = "Uni Pizzeria"
 
-  def initialize
+  def initialize(loader = WebsiteLoader.new("http://www.uni-pizzeria.at/speisen/mittagsteller.html"))
+    @loader = loader
     @weekly_menu = WeeklyMenu.new(NAME)
   end
 
   def scrape
-    page = Nokogiri::HTML(open("http://www.uni-pizzeria.at/speisen/mittagsteller.html"))
+    page = @loader.load
 
     lines = page.css("div[itemprop='articleBody'] p")
 

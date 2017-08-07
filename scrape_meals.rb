@@ -24,7 +24,19 @@ def scrape_websites(scrapers)
     puts ""
     puts "#{weekly_menu.name}"
     weekly_menu.menu_items.each do |menu_item|
-      puts "## #{menu_item.date} #{menu_item.meal}"
+
+      # remove leading and ending spaces
+      meal = menu_item.meal.strip!
+      if meal.nil? 
+        meal = menu_item.meal
+      end
+      
+      # jump over if menu is nil
+      if meal.nil? || meal.empty? || meal == " "
+        next
+      end
+
+      puts "## #{menu_item.date} #{meal}"
     end
   end
 
@@ -54,6 +66,17 @@ def save_to_database(menus)
     end
 
     weekly_menu.menu_items.each do |menu_item|
+      # remove leading and ending spaces
+      meal = menu_item.meal.strip!
+      if meal.nil? 
+        meal = menu_item.meal
+      end
+      
+      # jump over if menu is nil
+      if meal.nil? || meal.empty? || meal == " "
+        next
+      end
+      
       dbconnector.save_menu(place_id, menu_item)
     end
   end

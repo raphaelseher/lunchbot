@@ -51,10 +51,14 @@ class MensaKlagenfurtScraper < Scraper
 		index = 0
 		dates.each do |date|
 			day_meals = meals[index..index+2]
-			day_meals.each do |meal|
-				@weekly_menu.addMenuItem(MenuItem.new(date, meal))
+
+
+			if day_meals.any? 
+				day_meals.each do |meal|
+					@weekly_menu.addMenuItem(MenuItem.new(date, meal))
+				end
+				index = index + 3
 			end
-			index = index + 3
 		end
 	end
 end
